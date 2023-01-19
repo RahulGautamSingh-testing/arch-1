@@ -1,7 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "github>zaggash/gh-workflows//renovate-config/default",
+    "config:base",
     "github>zaggash/gh-workflows//renovate-config/default"
   ],
   "regexManagers": [
@@ -12,5 +12,9 @@
       ],
       "extractVersionTemplate": "^v?(?<version>.*)$"
     }
-  ]
+  ],
+  "platform": "github",
+  "onboarding": false,
+  "enabled": true,
+  "requireConfig": "optional",
 }
