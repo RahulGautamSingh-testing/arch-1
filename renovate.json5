@@ -1,9 +1,15 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base",
-    "github>zaggash/gh-workflows//renovate-config/default"
+    "github>RahulGautamSingh-testing/gh-workflows//renovate-config/default"
   ],
+
+
+  "git-submodules": {
+    // Git Submodules functionality is currently in beta testing, must opt-in
+    "enabled": true
+  },
+
   "regexManagers": [
     {
       "fileMatch": ["(^|/)PKGBUILD$"],
@@ -13,8 +19,24 @@
       "extractVersionTemplate": "^v?(?<version>.*)$"
     }
   ],
-  "platform": "github",
-  "onboarding": false,
-  "enabled": true,
-  "requireConfig": "optional",
+
+  "packageRules": [
+    {
+      description: "Automerge submodule digest update",
+      matchManagers: ["git-submodules"],
+      matchDatasources: ["git-refs"],
+      enabled: true,
+      automerge: true,
+      ignoreTests: true,
+      automergeType: "branch",
+    },
+
+    {
+      description: "Automerge custom PKGBUILD pkgver update",
+      matchDatasources: ["github-tags"],
+      automerge: true,
+      ignoreTests: true,
+      automergeType: "branch",
+    }
+  ]
 }
